@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
+import { HotelType } from "../../server/src/shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; // if there is no API_BASE_URL, use the same server for all the request
 
@@ -70,6 +71,20 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 
   if (!response.ok) {
     throw new Error("Failed to add hotel");
+  }
+
+  return response.json();
+};
+
+// Promise<HotelType[]> - specifying the return type of the data
+// the reason for it means that frontend and backend are working on the same type
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching hotels");
   }
 
   return response.json();
