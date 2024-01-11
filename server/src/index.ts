@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import myHotelRoutes from "./routes/my-hotels";
+import hotelRoutes from "./routes/hotels";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 // Catch all route
 // passing any request to url that are not api endpoint
